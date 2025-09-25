@@ -1,0 +1,144 @@
+# Tache API
+
+Backend Node.js/TypeScript pour la gestion des tâches, utilisant Prisma pour la base de données.
+
+## Fonctionnalités
+
+- API REST pour la gestion des tâches
+- Upload de fichiers (images, audio)
+- Validation et middlewares
+
+## Installation
+
+```bash
+npm install
+npm run dev
+```
+
+## Structure
+
+- `src/` : logique serveur, routes, contrôleurs
+- `prisma/` : schéma et migrations de la base de données
+- `uploads/` : fichiers uploadés
+
+# Backend Node.js/Express – Gestion de Tâches
+
+Ce projet est une API backend pour la gestion de tâches, avec upload d’images et d’audios, gestion des états, dates de début/fin, et conservation des fichiers lors des modifications.
+
+## Fonctionnalités principales
+- Création, modification, suppression et récupération de tâches
+- Upload d’images et d’audios (Multer)
+- Gestion des états de tâche (EN_COURS, TERMINÉ, etc.)
+- Ajout de dates de début et de fin pour chaque tâche
+- Conservation des fichiers existants lors de la modification
+- Génération d’URLs exploitables pour le frontend
+- Validation des données (Zod)
+- Authentification des routes protégées
+- Service de fichiers statiques (images/audios)
+
+## Structure du projet
+```
+prisma/           # Schéma et migrations Prisma
+src/
+  controllers/    # Logique des routes (CRUD, upload, etc.)
+  middlewares/    # Authentification, accès
+  repository/     # Accès base de données
+  routes/         # Définition des routes Express
+  services/       # Logique métier
+  validators/     # Validation Zod
+  uploader.ts     # Configuration Multer
+  uploadAudio.ts  # Configuration Multer pour audio
+  index.ts        # Point d’entrée Express
+```
+
+## Installation
+1. Cloner le repo
+2. Installer les dépendances :
+   ```bash
+   npm install
+   ```
+3. Configurer la base de données dans `prisma/schema.prisma`
+4. Appliquer les migrations Prisma :
+   ```bash
+   npx prisma migrate dev
+   ```
+5. Lancer le serveur :
+   ```bash
+   npm run dev
+   ```
+
+## Utilisation
+- Les routes principales sont :
+  - `POST /taches` : créer une tâche (avec fichiers)
+  - `PUT /taches/:id` : modifier une tâche
+  - `GET /taches` : récupérer toutes les tâches
+  - `DELETE /taches/:id` : supprimer une tâche
+- Les fichiers uploadés sont accessibles via `/uploads/...`
+- Les routes `/taches` sont protégées par authentification
+
+## Exemple d’envoi de tâche (frontend)
+```js
+const formData = new FormData();
+formData.append('titre', 'Ma tâche');
+formData.append('description', 'Description...');
+formData.append('photo', fileImage); // fichier image
+formData.append('audio', fileAudio); // fichier audio
+formData.append('dateDebut', '2025-09-25');
+formData.append('dateFin', '2025-09-30');
+fetch('http://localhost:4000/taches', {
+  method: 'POST',
+  body: formData,
+  credentials: 'include'
+});
+```
+
+## Technologies
+- Node.js
+- Express
+- Prisma
+- Multer
+- Zod
+
+## Auteur
+- Zeynab
+
+# ListeTodo (Frontend React)
+
+Application web pour la gestion des tâches, développée avec React, Vite et Tailwind CSS.
+
+## Fonctionnalités
+
+- Ajouter, modifier et supprimer des tâches
+- Interface moderne et responsive
+- Intégration avec l’API backend pour la gestion des tâches et l’upload de fichiers
+
+## Installation
+
+1. Se placer dans le dossier `listetodo`
+2. Installer les dépendances :
+   ```bash
+   npm install
+   ```
+3. Lancer le serveur de développement :
+   ```bash
+   npm run dev
+   ```
+
+## Structure du projet
+
+```
+src/
+  components/   # Composants React
+  App.jsx       # Composant principal
+  main.jsx      # Point d’entrée
+  App.css       # Styles principaux
+  index.css     # Styles globaux
+public/
+  vite.svg      # Logo
+```
+
+## Technologies
+
+- React
+- Vite
+- Tailwind CSS
